@@ -1,12 +1,24 @@
-import React from 'react'
-import ProductList from '~/components/productlist'
+import { useState } from "react";
 
 const Home = () => {
+  const productInitial = {
+    name: 'Ten san pham chua cap nhat',
+    price: 0
+  }
+  const [product, setProduct] = useState(productInitial)
+
+  const getProduct = () => {
+    setProduct({
+      name: 'Laptop',
+      price: 2000
+    })
+    console.log(product)
+  }
   return (
-    <div>
-      <h1>San pham ban chay</h1>
-      <ProductList />
-    </div>
+    <>
+      <button onClick={() => getProduct()}>Cap nhat san pham</button>
+      {product.name}
+    </>
   )
 }
 

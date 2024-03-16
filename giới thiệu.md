@@ -19,3 +19,6 @@ chọn react
 TypeScript + SWC
 
 ----------npm @type/node -D
+
+---------react boostrap
+
