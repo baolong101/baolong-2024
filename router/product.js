@@ -1,10 +1,11 @@
 import express from 'express';
-import { products } from '../models/product.js';
+import { products } from '../models/product.js'; 
+import { CheckValidateProduct } from '../middleware/product.js';
+
 const router = express.Router();
-router.post('/products',async (req,res)=>{
-    const body = req.body;    
-    const product = await new products(body).save();
-    res.send(product);
+router.post('/products',CheckValidateProduct,async (req,res)=>{
+    const product = await new products(req.body).save();
+    res.send({status: true, data:product});    
 })
 router.get('/products',async(req,res)=>{
     const response = await products.find();
