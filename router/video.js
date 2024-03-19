@@ -21,6 +21,8 @@ const videoObject = Joi.object({
     "number.empty": "thoi gian video khong duoc trong",
     "number.min": "thoi gian qua ngan",
   }),
+
+  
 });
 
 const videorouter = express.Router();
