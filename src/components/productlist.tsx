@@ -1,14 +1,32 @@
 import React, { useEffect, useState } from 'react'
 import { productType } from '~/types/product'
+import instance from '~/apis'
 
 const ProductList = () => {
   const [products, setProducts] = useState([])
   useEffect(() => {
-    fetch('http://localhost:5173/products')
-      .then((res) => res.json())
-      .then((data) => {
+    // fetch('http://localhost:3000/products')
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     setProducts(data)
+    //   })
+
+    // Cach 2:
+    // (async () => {
+    //   const data = await getAllProducts()
+    //   setProducts(data)
+    // })()
+
+    // Cach 3:
+    const getProducts = async () => {
+      try {
+        const { data } = await instance.get('/products')
         setProducts(data)
-      })
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    getProducts()
   }, [])
   return (
     <div>
