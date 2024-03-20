@@ -11,4 +11,5 @@ Tạo thư viện node-localstorage: npm install node-localstorage
 npm i mongose
 
 kết
-
+ 
+ -------cài đặt: npm i bcryptjs
