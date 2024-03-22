@@ -66,3 +66,32 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+
+.active {
+  color: red !important; /* Màu chữ đỏ với độ ưu tiên cao hơn */
+  font-weight: bold !important; 
+}
+.logo1{
+  width: 75px !important;
+  height: 50px !important;
+}
+.Container{
+  width: 100% !important;
+}
+.section-p1{
+  background-color: #EEEEEE;
+  margin-top: 20px;
+  
+}
+
+.footer-section ul li{
+  list-style-type: none;
+}
+.footer-section ul li a{
+  color: #212529;
+  text-decoration: none;
+}
+.button{
+  margin: 20px 110px
+}

@@ -1,11 +1,17 @@
-import React, { useEffect, useState } from 'react'
-import { productType } from '~/types/product'
-import instance from '~/apis'
+import React, { useEffect, useState } from 'react';
+import { productType } from '~/types/product';
+import instance from '~/apis';
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import { Link } from 'react-router-dom';
 
 const ProductList = () => {
-  const [products, setProducts] = useState([])
+  const [products, setProducts] = useState([]);
+
   useEffect(() => {
-    // fetch('http://localhost:3000/products')
+     // fetch('http://localhost:3000/products')
     //   .then((res) => res.json())
     //   .then((data) => {
     //     setProducts(data)
@@ -20,41 +26,47 @@ const ProductList = () => {
     // Cach 3:
     const getProducts = async () => {
       try {
-        const { data } = await instance.get('/products')
-        setProducts(data)
+        const { data } = await instance.get('/products');
+        setProducts(data);
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
+    };
+    getProducts();
+  }, []);
+
+  // Function to truncate long titles
+  const truncateTitle = (title: string, maxLength: number) => {
+    if (title.length > maxLength) {
+      return title.substring(0, maxLength) + '...'; // Add '...' for truncated text
     }
-    getProducts()
-  }, [])
+    return title;
+  };
+
   return (
     <div>
-      <h2>San pham danh cho nam:</h2>
-      {products.map((product: productType, index) => (
-        <div key={product.id}>
-          <table>
-            <tr>
-              <th>stt</th>
-              <th>name</th>
-              <th>price</th>
-              <th>image</th>
-              <th>description</th>
-            </tr>
-            <tr>
-              <td>{index + 1}</td>
-              <td>{product.title}</td>
-              <td>{product.price}</td>
-              <td>
-                <img width={360} src={product.thumbnail} alt={product.title} />
-              </td>
-              <td>{product.description}</td>
-            </tr>
-          </table>
-        </div>
-      ))}
+      <h2>Sản phẩm bán chạy:</h2>
+      <Row xs={1} md={2} lg={4} className='g-4'>
+        {products.map((product: productType) => (
+          <Col key={product.id}>
+            <Card style={{ height: '380px' }}>
+              <div style={{ height: '170px' }}>
+                <Card.Img style={{ height: '170px' }} variant='top' src={product.thumbnail} alt={product.title} />
+              </div>
+              <Card.Body>
+                {/* Truncate the title if it's too long */}
+                <Card.Title style={{ width: '200px', height: '50px' }}>{truncateTitle(product.title, 20)}</Card.Title>
+                <Card.Text>{product.price}</Card.Text>
+                <Link to={`/shop/${product.id}`}>
+                  <Button variant='primary'>mua ngay</Button>
+                </Link>
+              </Card.Body>
+            </Card>
+          </Col>
+        ))}
+      </Row>
     </div>
-  )
+  );
 }
 
-export default ProductList
+export default ProductList;
