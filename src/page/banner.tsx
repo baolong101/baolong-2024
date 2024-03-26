@@ -3,7 +3,7 @@ import Carousel from 'react-bootstrap/Carousel';
 
 function Banner() {
   return (
-    <Carousel>
+    <Carousel className='mt-14'>
       <Carousel.Item>
         {/* <ExampleCarouselImage text="First slide" /> */}
         <img style={{width: '100%', height:'1280'}} src="../../public/banner1.webp" alt="" />

@@ -1,3 +1,6 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -69,8 +72,8 @@ button:focus-visible {
 
 
 .active {
-  color: red !important; /* Màu chữ đỏ với độ ưu tiên cao hơn */
-  font-weight: bold !important; 
+  color: red ; /* Màu chữ đỏ với độ ưu tiên cao hơn */
+  font-weight: bold ; 
 }
 .logo1{
   width: 75px !important;

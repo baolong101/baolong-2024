@@ -26,30 +26,45 @@ const ProductDetail = (props: Props) => {
   }, [id]) // Added id to the dependency array to re-fetch when id changes
 
   return (
-    <Container style={{marginTop: '20px' ,width: '2990px'}}>
+    
       <div >
       {product && (
-        <Card>
-          <Card.Body>
-            <Row>
-              <Col><Card.Img style={{borderRadius: '8px'}} variant='top' src={product.thumbnail} alt={product.title} /></Col>
-              <Col style={{textAlign: 'left'}}>
-                <h1> <Card.Text>{product.title}</Card.Text></h1>
-                <h3><Card.Text>Giá: {product.price}</Card.Text></h3>
-                <h5>Chi tiết sản phẩm</h5>
-                <div style={{border: '1px solid', height: '90px'}}>
-                <Card.Text style={{margin: '10px'}}>{product.description}</Card.Text>
-                </div>
-                <div className='button'>
-                <Button href="#">Mua ngay</Button> <Button type="submit">Thêm vào giỏ hàng</Button>{' '}
-                </div>
-              </Col>
-            </Row>
-          </Card.Body>
-        </Card>
+        <section className="overflow-hidden bg-gray-50 sm:grid sm:grid-cols-2 sm:items-center">
+          
+          <img
+           src={product.thumbnail} alt={product.title}
+          className="h-full w-full object-cover sm:h-[calc(100%_-_2rem)] sm:self-end sm:rounded-ss-[30px] md:h-[calc(100%_-_4rem)] md:rounded-ss-[60px] object-fit"
+        />
+        <div className="p-8 md:p-12 lg:px-16 lg:py-24">
+          <div className="mx-auto max-w-xl text-center ltr:sm:text-left rtl:sm:text-right">
+            <h2 className="text-2xl font-bold text-gray-900 md:text-3xl text-left">
+            {product.title}
+            </h2>
+            <h4 className=" font-bold text-gray-900  text-left">Giá tiền: <span className='text-red-500 '>{product.price} $</span>
+            </h4>
+            <h4 className=" font-bold text-gray-900  text-left">
+            Chi tiết sản phẩm
+            </h4>
+            <p className="hidden text-left text-gray-500 md:mt-4 md:block">
+              {product.description}
+            </p>
+      
+            <div className="mt-4 md:mt-8">
+              <a
+                href="#"
+                className="inline-block rounded bg-emerald-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-emerald-700 focus:outline-none focus:ring focus:ring-yellow-400 no-underline"
+              >
+                Get Started Today
+              </a>
+            </div>
+          </div>
+        </div>
+      
+        
+      </section>
       )}
     </div>
-    </Container>
+    
   )
 }
 
