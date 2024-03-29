@@ -1,29 +1,29 @@
 import Joi from 'joi';
 
-const productObject = Joi.object({
-    name: Joi.string().required().empty().messages({
-        "any.required": "tên không được để trống",
-        "string.empty": "tên không đúng định dạng"
+const productSchema = Joi.object({
+    name: Joi.string().required().messages({
+        "any.required": "Tên không được để trống",
+        "string.empty": "Tên không được để trống"
     }),
 
-    image: Joi.string().required().empty().messages({
-        "any.required": "giá không được để trống",
-        "string.min": "giá không được nhỏ hơn 1000"
+    image: Joi.string().required().messages({
+        "any.required": "Hình ảnh không được để trống",
+        "string.empty": "Hình ảnh không được để trống"
     }),
 
     price: Joi.number().required().min(1000).messages({
-        "any.required": "tên không được để trống",
-        "string.empty": "tên không đúng định dạng"
+        "any.required": "Giá không được để trống",
+        "number.min": "Giá không được nhỏ hơn 1000"
     })
-})
+});
 
-export const CheckValidateProduct= (req, res, next)=>{
-    const {name, image, price} = req.body;
-    const {error}= productObject.validate({name, image, price})
+export const checkValidateProduct = (req, res, next) => {
+    const { name, image, price } = req.body;
+    const { error } = productSchema.validate({ name, image, price });
 
-    if(error){
-        res.send({status: false, message: error.message})
-    }else{
+    if (error) {
+        return res.status(400).json({ status: false, message: error.details[0].message });
+    } else {
         next();
     }
 }

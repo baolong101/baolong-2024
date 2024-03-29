@@ -1,25 +1,13 @@
 import express from 'express';
 import { products } from '../models/product.js'; 
-import { CheckValidateProduct } from '../middleware/product.js';
+import { checkValidateProduct } from '../middleware/product.js';
+import permission from '../middleware/permission.js';
+import { addProduct, putProduct, getProduct, deleteproduct } from '../controller/product.js';
+
 
 const router = express.Router();
-router.post('/products',CheckValidateProduct,async (req,res)=>{
-    const product = await new products(req.body).save();
-    res.send({status: true, data:product});    
-})
-router.get('/products',async(req,res)=>{
-    const response = await products.find();
-    res.send(response)
-})
-router.put('/products/:id',async(req,res)=>{
-    const id = req.params.id;
-    const body = req.body;
-    const response = await products.findOneAndUpdate({_id:id},body,{new:true});
-    res.send(response)
-})
-router.delete('/products/:id',async(req,res)=>{
-    const id = req.params.id;
-    const response = await products.findOneAndDelete({_id:id});
-    res.send(response)
-})
+router.post('/products', permission,checkValidateProduct, addProduct)
+router.get('/products',getProduct)
+router.put('/products/:id',putProduct)
+router.delete('/products/:id',deleteproduct)
 export default router;

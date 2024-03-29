@@ -6,6 +6,7 @@ import Authrouter from './router/auth.js';
 import booksrouter from './router/books.js';
 import books from './ASM1/router/book.js';
 import Auth from './ASM1/router/auth.js';
+import uploadrouter from './router/upload.js';
 const app = express();
 const port = 3000;
 app.use(express.json())
@@ -15,6 +16,7 @@ app.use('/api',Authrouter);
 app.use('/api',booksrouter);
 app.use('/api',books);
 app.use('/api',Auth);
+app.use('/api',uploadrouter);
 app.listen(port,async ()=>{
     await connectdb();
     console.log(`Endpoint http://localhost:${port}/api/products`);
