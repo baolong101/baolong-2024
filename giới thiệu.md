@@ -22,3 +22,4 @@ TypeScript + SWC
 
 ---------react boostrap
 
+npm install react-hook-form

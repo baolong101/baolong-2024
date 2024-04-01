@@ -1,12 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { Card } from 'react-bootstrap'
 import instance from '~/apis'
 import { productType } from '~/types/product'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
-import Container from 'react-bootstrap/Container';
-import Button from 'react-bootstrap/Button';
 type Props = {}
 
 const ProductDetail = (props: Props) => {

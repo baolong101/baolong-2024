@@ -1,6 +1,3 @@
-import Container from 'react-bootstrap/Container'
-import Nav from 'react-bootstrap/Nav'
-import Navbar from 'react-bootstrap/Navbar'
 const Header = () => {
   return (
     <header className="bg-gray-100">
@@ -29,7 +26,7 @@ const Header = () => {
             </li>
 
             <li>
-              <a className="text-gray-500 transition text-xl ml-7 hover:text-gray-500/75 no-underline" href="/blog"> blog </a>
+              <a className="text-gray-500 transition text-xl ml-7 hover:text-gray-500/75 no-underline" href="/admin"> Admin </a>
             </li>
 
             
