@@ -32,7 +32,7 @@ type cryptoType = {
   network: string
 }
 
-export type user = {
+export type TypeUser = {
   id: number
   firstName: string
   lastName: string

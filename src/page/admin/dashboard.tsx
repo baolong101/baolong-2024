@@ -3,9 +3,10 @@ import { productType } from '~/types/product'
 import Table from 'react-bootstrap/Table'
 import { Link } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
-type Props = { products: productType[] }
 
-const Dashboard = ({ products }: Props) => {
+type Props = { products: productType[]; onDel: (id: number) => void };
+
+const Dashboard = ({ products, onDel }: Props) => {
   console.log(products)
   return (
     <div>
@@ -37,11 +38,9 @@ const Dashboard = ({ products }: Props) => {
                 <td className='align-middle'>{item.price}</td>
                 <td className='align-middle'>{item.description}</td>
                 <td className='align-middle w-[20%]'>
-                  <Button variant='danger'>
-                    <Link className='text-white font-semibold' to={`/admin/delete/${item.id}`}>
-                      Delete
-                    </Link>{' '}
-                  </Button>{' '}
+                <button className="btn btn-danger" onClick={() => onDel(item.id)}>
+                  Delete
+                </button>
                   <Button variant='danger'>
                     <Link className='text-white font-semibold' to={`/admin/update/${item.id}`}>
                       View
