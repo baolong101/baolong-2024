@@ -6,8 +6,19 @@ export const addProduct= async (req,res)=>{
 }
 
 export const getProduct=async(req,res)=>{
-    const response = await products.find();
-    res.send(response)
+    try {
+        const page= req.query.page;
+        const limit= req.query.limit;
+        // if(page){
+            const responsive= await products.find().skip((page-1)*limit).limit(limit);
+                res.status(200).send(responsive)
+        // }else{
+        //     const response = await products.find({price: {$gt:2000}}).sort({price: 1});
+        // res.send(response)
+        // }
+    } catch (error) {
+        res.status(503).send({status: false, message: "loi"+error})
+    }
 }
 
 export const putProduct=async(req,res)=>{

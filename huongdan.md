@@ -13,3 +13,17 @@ npm i mongose
 kết
  
  -------cài đặt: npm i bcryptjs
+
+
+----------cần nhớ
+$ne: !=
+$gt: >
+$gte: >=
+$lt: <
+$lte: <=
+sort(): sắp xếp
+- viết chức năng tìm kiếm giá snar phẩ,  > 1000
+-sản phẩm liên quan:
+    ĐK: - chung danh mục
+        - khác với id sản phẩm hiện tại
+         
