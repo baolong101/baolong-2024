@@ -36,6 +36,9 @@ const AddProduct = ({ onAdd }: Props) => {
             id="title"
             {...register("title", {required: true})}
               />
+              {errors.title && (
+            <div className="text-red-500">{errors.title.message}</div>
+          )}
             </div>
           </div>
           
@@ -49,6 +52,9 @@ const AddProduct = ({ onAdd }: Props) => {
             id="price"
             {...register("price", {required: true})}
               />
+              {errors.price && (
+            <div className="text-red-500">{errors.price.message}</div>
+          )}
             </div>
           </div>
           <div>
@@ -62,6 +68,9 @@ const AddProduct = ({ onAdd }: Props) => {
                 id="description"
                 {...register("description")}
               />
+              {errors.description && (
+            <div className="text-red-500">{errors.description.message}</div>
+          )}
             </div>
           </div>
 

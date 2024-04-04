@@ -532,18 +532,6 @@
         "https://cdn.dummyjson.com/product-images/30/3.jpg",
         "https://cdn.dummyjson.com/product-images/30/thumbnail.jpg"
       ]
-    },
-    {
-      "title": "sản phẩm mơi 2",
-      "price": "1000",
-      "description": "sản phẩm mới",
-      "id": 38
-    },
-    {
-      "title": "sản phẩm mới",
-      "price": 30000,
-      "description": "sản phẩm mới",
-      "id": 39
     }
   ],
   "carts": [

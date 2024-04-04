@@ -51,7 +51,7 @@ const App = () => {
     navigate('/admin')
   }
   const handleUpdateProduct = (product: productType) => {
-    ;(async () => {
+    (async () => {
       const { data } = await instance.put(`/products/${product.id}`, product)
       setProducts(products.map((item) => (item.id === data.id ? data : item)))
       navigate('/admin')
