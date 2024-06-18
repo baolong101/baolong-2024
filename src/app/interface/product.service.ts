@@ -6,3 +6,9 @@ export interface IProduct{
   category: string,
   image: string
 }
+export interface IAuth{
+  id?: number,
+  email: string,
+  password: number,
+  confirmPassword?: string,
+}

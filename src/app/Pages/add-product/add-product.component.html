@@ -1,15 +1,34 @@
-<div class="drop-shadow-2xl rounded bg-zinc-100 w-[42%] h-[350px] mx-auto mt-5">
-    <form class="w-[500px] ml-4 mt-8">
+<div class="drop-shadow-2xl rounded bg-zinc-100 w-[42%]  mx-auto mt-5">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="w-[500px] ml-4 mt-8">
         <h1 class="text-center">Add Product</h1>
+        <div class="mb-3"> 
+          <label class="form-label">name</label>
+          <input type="text" formControlName="name" class="form-control">
+          <div *ngIf="form.get('name')?.invalid && (form.get('name')?.dirty || form.get('name')?.touched)">
+            <span *ngIf="form.get('name')?.hasError('required')">khong duoc de trong</span>
+            <span *ngIf="form.get('name')?.hasError('minlength')">khong duoc it hon 3 ki tu</span>
+          </div>
+        </div>
         <div class="mb-3">
-          <label class="form-label">Email address</label>
-          <input type="email" class="form-control">
+          <label class="form-label">image</label>
+          <input type="text" formControlName="image" class="form-control">
           
         </div>
         <div class="mb-3">
-          <label class="form-label">Password</label>
-          <input type="password" class="form-control">
-        </div> 
+          <label class="form-label">price</label>
+          <input type="number" formControlName="price" class="form-control">
+          
+        </div>
+        <div class="mb-3">
+          <label class="form-label">category</label>
+          <input type="text" formControlName="category" class="form-control">
+          
+        </div>
+        <div class="mb-3">
+          <label class="form-label">description</label>
+          <input type="text" formControlName="description" class="form-control">
+          
+        </div>
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
 </div>

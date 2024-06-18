@@ -8,5 +8,13 @@
       "description": "con",
       "id": 2
     }
+  ],
+  "users": [
+    {
+      "email": "long@gmail.com",
+      "password": "$2a$10$MmkC7gdzgCrdRBgsGMrhb.XfxpIhsBHi5/Ev4rCO2Wzyt1tibxRbC",
+      "confirmPassword": "123456",
+      "id": 1
+    }
   ]
 }
