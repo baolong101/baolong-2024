@@ -1,0 +1,64 @@
+{
+  "products": [
+    {
+      "title": "Product ",
+      "image": "https://th.bing.com/th/id/OIP.PzYZEuku8eAKMBscWYHnLgHaE8?w=247&h=180&c=7&r=0&o=5&pid=1.7",
+      "price": 19.99,
+      "desc": "Description for Product 1",
+      "id": 1
+    },
+    {
+      "title": "egrnmy",
+      "image": "https://th.bing.com/th/id/OIP.PzYZEuku8eAKMBscWYHnLgHaE8?w=247&h=180&c=7&r=0&o=5&pid=1.7",
+      "price": 342,
+      "desc": "grbgf csdvsd",
+      "id": 4
+    },
+    {
+      "title": "adsff243",
+      "image": "ưefdvbfvrdc",
+      "price": 12321,
+      "desc": "zdfvwevwe",
+      "id": 5
+    },
+    {
+      "title": "adsffwqedfgh",
+      "image": "ưefdvbfvrdc",
+      "price": 12321,
+      "desc": "zdfvwevwe",
+      "id": 6
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "name": "Alice Johnson",
+      "email": "alice@example.com",
+      "password": "password123"
+    },
+    {
+      "id": 2,
+      "name": "Bob Smith",
+      "email": "bob@example.com",
+      "password": "password123"
+    },
+    {
+      "id": 3,
+      "name": "Charlie Brown",
+      "email": "charlie@example.com",
+      "password": "password123"
+    },
+    {
+      "id": 4,
+      "name": "Daisy Ridley",
+      "email": "daisy@example.com",
+      "password": "password123"
+    },
+    {
+      "id": 5,
+      "name": "Eve Black",
+      "email": "eve@example.com",
+      "password": "password123"
+    }
+  ]
+}
