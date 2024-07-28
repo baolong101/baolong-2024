@@ -1,17 +1,29 @@
-import React from "react";
-import { useForm } from "react-hook-form";
-import { IProduct } from "../interface/product";
-import Joi from "joi";
 import { joiResolver } from "@hookform/resolvers/joi";
+import Joi from "joi";
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { instance } from "../Apis";
+import { ICate, IProduct } from "../interface/product";
 
 type Props = { onAdd: (product: IProduct) => void };
 const Schemma = Joi.object({
-  title: Joi.string().required().min(6),
+  title: Joi.string().required(),
   image: Joi.string().required(),
   price: Joi.number().required().min(0),
-  desc: Joi.string().required(),
+  categoryId: Joi.number()
 });
 const Add = ({ onAdd }: Props) => {
+  // category-------------------------------------------
+  const [categories, setCategory] = useState<ICate[]>([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      const {data} = await instance.get('/category');
+      setCategory(data);
+    };
+    fetchData();
+  }, []);
+
+  // product--------------------------------------------
   const {
     register,
     handleSubmit,
@@ -82,16 +94,17 @@ const Add = ({ onAdd }: Props) => {
 
           <div>
             <div className="relative">
-              <p className="text-left">Chi tiết sản phẩm</p>
-              <input
-                type="text"
+              <p className="text-left">Chọn danh mục</p>
+              <select
                 className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
-                placeholder="description..."
-                {...register("desc", { required: true })}
-              />
-              {errors.desc && (
-                <p className="text-red-500">{errors.desc.message}</p>
-              )}
+                {...register("categoryId", { required: true })}
+              >
+                {categories.map(category => (
+                  <option key={category.id} value={category.id}>
+                    {category.name}
+                  </option>
+                ))}
+              </select>
             </div>
           </div>
 

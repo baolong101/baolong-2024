@@ -15,9 +15,11 @@ const Banner = (props: Props) => {
   }, [index]);
   const next = () => setIndex((index + 1) % images.length);
   return (
-    <div className="bg-gradient-to-r transition-transform from-banner-left to-banner-right h-[582px] overflow-hidden mt-[88px] ">
+    <div className="bg-gradient-to-r transition-transform from-banner-left to-banner-right h-[582px] overflow-hidden mt-[120px] ">
       <div className=" float-right w-full transition-transform">
-        <img className="ml-[75px] w-[1249px]" src={images[index]} alt="" />
+        <div  className="max-w">
+          <img className="w-full " src={images[index]} alt="" />
+        </div>
         <button
           onClick={prev}
           className="absolute top-2/3 left-4 transform -translate-y-1/2  text-black text-[15px] px-2 py-1 rounded ml-[45px]"

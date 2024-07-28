@@ -1,6 +1,6 @@
 import { faHeart } from "@fortawesome/free-solid-svg-icons/faHeart";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { faBagShopping } from "@fortawesome/free-solid-svg-icons/faBagShopping";
 import {
   faArrowCircleRight,
@@ -8,14 +8,24 @@ import {
   faRecycle,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
+import { IProduct } from "../interface/product";
+import { instance } from "../Apis";
 
 type Props = {};
 
 const Shop = (props: Props) => {
+  const [products, setProducts] = useState<IProduct[]>([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      const {data} = await instance.get('/products');
+      setProducts(data);
+    };
+    fetchData();
+  }, []);
   return (
     <>
       <main>
-        <div className="h-[1400px] ">
+        <div className="w-full mt-[120px] h-[1350px]">
           <div className=" h-[100px] bg-gradient-to-r from-shop-left to-shop-right">
             <h1 className="text-[27px] mx-auto w-[970px] text-left font-semibold py-[30px]">
               Töpfe & Behälter
@@ -80,8 +90,8 @@ const Shop = (props: Props) => {
                     />
                   </div>
                   <div className="flex items-center justify-center">
-                    <div className="bg-[#0A0A0A] bg-opacity-40 h-[261px] w-[208px] mt-[-263px] px-4 ml-[-13px]">
-                      <h1 className="text-white items-center font-bold text-[25px] text-left">
+                    <div className="bg-[#0A0A0A] bg-opacity-40 h-[261px] w-[208px] mt-[-263px] px-4 ml-[-46px]">
+                      <h1 className="text-white items-center font-bold ml-[12px] text-[25px] text-left">
                         Schlammkuchen
                       </h1>
                       <h1 className="text-white items-center text-left py-[180px] text-[15px]">
@@ -148,279 +158,41 @@ const Shop = (props: Props) => {
                   </span>
                 </div>
               </div>
-              {/* ---------------------------------------------------------- --------------------------------------------------------------*/}
+              {/* ------------------------------products---------------------------------*/}
               <div className="w-[90%] mx-auto ">
-                <div className="flex justify-between mx-auto *:text-left mt-[20px]">
-                  <div>
-                    <Link to={'/deltail'}>
-                    <div className="w-[230px] h-[270px] group">
-                      <img
-                        className="mx-auto "
-                        src="src/assets/shop10.png"
-                        alt=""
-                      />
-                      {/* ------------- */}
-                      <div className="flex w-[150px] justify-between mt-[-120px] mx-auto hidden  group-hover:flex">
-                        <p className="w-[40px] h-[40px] bg-white text-[#4E7C32] text-center py-[9px]">
-                          <FontAwesomeIcon icon={faRecycle} />
-                        </p>
-                        <p className="w-[40px] h-[40px] bg-[#4E7C32] text-white text-center py-[9px]">
-                          <FontAwesomeIcon icon={faBagShopping} />
-                        </p>
-                        <p className="w-[40px] h-[40px] bg-white *:text-[#4E7C32] text-center py-[9px]">
-                          <FontAwesomeIcon icon={faHeart} />
-                        </p>
-                      </div>
-                    </div>
-                    <h1 className="text-[16px] font-bold">
-                      Square cultivation pots{" "}
-                    </h1>
-                    <p className="text-[15px] ">
-                      <span>$38.00</span>{" "}
-                      <span className="line-through">$48.00</span>
-                    </p>
-                    </Link>
-                  </div>
-                  {/* ---------------------- ---------------------------------------------------------------------------------------------------*/}
+                <div className="flex flex-wrap justify-between mx-auto *:text-left mt-[20px] *:mt-[20px]">
+                {products.slice(0,12).map((item)=>(
                   <div>
                   <Link to={'/deltail'}>
-                    <div className="w-[230px] h-[270px] group">
-                      <img
-                        className="mx-auto "
-                        src="src/assets/shop1.png"
-                        alt=""
-                      />
-                      {/* ------------- */}
-                      <div className="flex w-[150px] justify-between mt-[-120px] mx-auto hidden  group-hover:flex">
-                        <p className="w-[40px] h-[40px] bg-white text-[#4E7C32] text-center py-[9px]">
-                          <FontAwesomeIcon icon={faRecycle} />
-                        </p>
-                        <p className="w-[40px] h-[40px] bg-[#4E7C32] text-white text-center py-[9px]">
-                          <FontAwesomeIcon icon={faBagShopping} />
-                        </p>
-                        <p className="w-[40px] h-[40px] bg-white *:text-[#4E7C32] text-center py-[9px]">
-                          <FontAwesomeIcon icon={faHeart} />
-                        </p>
-                      </div>
+                  <div className="w-[230px] h-[270px] group">
+                    <img
+                      className="mx-auto "
+                      src={item.image}
+                      alt=""
+                    />
+                    {/* ------------- */}
+                    <div className="flex w-[150px] justify-between mt-[-120px] mx-auto hidden  group-hover:flex ">
+                      <p className="w-[40px] h-[40px] bg-white text-[#4E7C32] text-center py-[9px]">
+                        <FontAwesomeIcon icon={faRecycle} />
+                      </p>
+                      <p className="w-[40px] h-[40px] bg-[#4E7C32] text-white text-center py-[9px]">
+                        <FontAwesomeIcon icon={faBagShopping} />
+                      </p>
+                      <p className="w-[40px] h-[40px] bg-white *:text-[#4E7C32] text-center py-[9px]">
+                        <FontAwesomeIcon icon={faHeart} />
+                      </p>
                     </div>
-                    <h1 className="text-[16px] font-bold">
-                      Square cultivation pots{" "}
-                    </h1>
-                    <p className="text-[15px] ">
-                      <span>$38.00</span>{" "}
-                      <span className="line-through">$48.00</span>
-                    </p>
-                    </Link>
                   </div>
-                  {/* ---------------------- */}
-                  <div>
-                    <div className="w-[230px] h-[270px] group">
-                      <img
-                        className="mx-auto "
-                        src="src/assets/shop3.png"
-                        alt=""
-                      />
-                      {/* ------------- */}
-                      <div className="flex w-[150px] justify-between mt-[-120px] mx-auto hidden  group-hover:flex">
-                        <p className="w-[40px] h-[40px] bg-white text-[#4E7C32] text-center py-[9px]">
-                          <FontAwesomeIcon icon={faRecycle} />
-                        </p>
-                        <p className="w-[40px] h-[40px] bg-[#4E7C32] text-white text-center py-[9px]">
-                          <FontAwesomeIcon icon={faBagShopping} />
-                        </p>
-                        <p className="w-[40px] h-[40px] bg-white *:text-[#4E7C32] text-center py-[9px]">
-                          <FontAwesomeIcon icon={faHeart} />
-                        </p>
-                      </div>
-                    </div>
-                    <h1 className="text-[16px] font-bold">
-                      Square cultivation pots{" "}
-                    </h1>
-                    <p className="text-[15px] ">
-                      <span>$38.00</span>{" "}
-                      <span className="line-through">$48.00</span>
-                    </p>
-                  </div>
-                  {/* ---------------------- */}
+                  <h1 className="text-[16px] font-bold">
+                  {item.title}
+                  </h1>
+                  <p className="text-[15px] ">
+                    <span>${item.price}</span>{" "}
+                    <span className="line-through">    $48.00</span>
+                  </p>
+                  </Link>
                 </div>
-                {/* ------------------------------- */}
-                <div className="flex justify-between mx-auto *:text-left mt-[20px]">
-                  <div>
-                    <div className="w-[230px] h-[270px] group">
-                      <img
-                        className="mx-auto "
-                        src="src/assets/shop4.png"
-                        alt=""
-                      />
-                      {/* ------------- */}
-                      <div className="flex w-[150px] justify-between mt-[-120px] mx-auto hidden  group-hover:flex">
-                        <p className="w-[40px] h-[40px] bg-white text-[#4E7C32] text-center py-[9px]">
-                          <FontAwesomeIcon icon={faRecycle} />
-                        </p>
-                        <p className="w-[40px] h-[40px] bg-[#4E7C32] text-white text-center py-[9px]">
-                          <FontAwesomeIcon icon={faBagShopping} />
-                        </p>
-                        <p className="w-[40px] h-[40px] bg-white *:text-[#4E7C32] text-center py-[9px]">
-                          <FontAwesomeIcon icon={faHeart} />
-                        </p>
-                      </div>
-                    </div>
-                    <h1 className="text-[16px] font-bold">
-                      Square cultivation pots{" "}
-                    </h1>
-                    <p className="text-[15px] ">
-                      <span>$38.00</span>{" "}
-                      <span className="line-through">$48.00</span>
-                    </p>
-                  </div>
-                  {/* ---------------------- ---------------------------------------------------------------------------------------------------*/}
-                  <div>
-                    <div className="w-[230px] h-[270px] group">
-                      <img
-                        className="mx-auto "
-                        src="src/assets/shop5.png"
-                        alt=""
-                      />
-                      {/* ------------- */}
-                      <div className="flex w-[150px] justify-between mt-[-120px] mx-auto hidden  group-hover:flex">
-                        <p className="w-[40px] h-[40px] bg-white text-[#4E7C32] text-center py-[9px]">
-                          <FontAwesomeIcon icon={faRecycle} />
-                        </p>
-                        <p className="w-[40px] h-[40px] bg-[#4E7C32] text-white text-center py-[9px]">
-                          <FontAwesomeIcon icon={faBagShopping} />
-                        </p>
-                        <p className="w-[40px] h-[40px] bg-white *:text-[#4E7C32] text-center py-[9px]">
-                          <FontAwesomeIcon icon={faHeart} />
-                        </p>
-                      </div>
-                    </div>
-                    <h1 className="text-[16px] font-bold">
-                      Square cultivation pots{" "}
-                    </h1>
-                    <p className="text-[15px] ">
-                      <span>$38.00</span>{" "}
-                      <span className="line-through">$48.00</span>
-                    </p>
-                  </div>
-                  {/* ---------------------- */}
-                  <div>
-                    <div className="w-[230px] h-[270px] group">
-                      <img
-                        className="mx-auto "
-                        src="src/assets/shop6.png"
-                        alt=""
-                      />
-                      {/* ------------- */}
-                      <div className="flex w-[150px] justify-between mt-[-120px] mx-auto hidden  group-hover:flex">
-                        <p className="w-[40px] h-[40px] bg-white text-[#4E7C32] text-center py-[9px]">
-                          <FontAwesomeIcon icon={faRecycle} />
-                        </p>
-                        <p className="w-[40px] h-[40px] bg-[#4E7C32] text-white text-center py-[9px]">
-                          <FontAwesomeIcon icon={faBagShopping} />
-                        </p>
-                        <p className="w-[40px] h-[40px] bg-white *:text-[#4E7C32] text-center py-[9px]">
-                          <FontAwesomeIcon icon={faHeart} />
-                        </p>
-                      </div>
-                    </div>
-                    <h1 className="text-[16px] font-bold">
-                      Square cultivation pots{" "}
-                    </h1>
-                    <p className="text-[15px] ">
-                      <span>$38.00</span>{" "}
-                      <span className="line-through">$48.00</span>
-                    </p>
-                  </div>
-                  {/* ---------------------- */}
-                </div>
-                {/* ------------------------------- */}
-                <div className="flex justify-between mx-auto *:text-left mt-[20px]">
-                  <div>
-                    <div className="w-[230px] h-[270px] group">
-                      <img
-                        className="mx-auto "
-                        src="src/assets/shop7.png"
-                        alt=""
-                      />
-                      {/* ------------- */}
-                      <div className="flex w-[150px] justify-between mt-[-120px] mx-auto hidden  group-hover:flex">
-                        <p className="w-[40px] h-[40px] bg-white text-[#4E7C32] text-center py-[9px]">
-                          <FontAwesomeIcon icon={faRecycle} />
-                        </p>
-                        <p className="w-[40px] h-[40px] bg-[#4E7C32] text-white text-center py-[9px]">
-                          <FontAwesomeIcon icon={faBagShopping} />
-                        </p>
-                        <p className="w-[40px] h-[40px] bg-white *:text-[#4E7C32] text-center py-[9px]">
-                          <FontAwesomeIcon icon={faHeart} />
-                        </p>
-                      </div>
-                    </div>
-                    <h1 className="text-[16px] font-bold">
-                      Square cultivation pots{" "}
-                    </h1>
-                    <p className="text-[15px] ">
-                      <span>$38.00</span>{" "}
-                      <span className="line-through">$48.00</span>
-                    </p>
-                  </div>
-                  {/* ---------------------- ---------------------------------------------------------------------------------------------------*/}
-                  <div>
-                    <div className="w-[230px] h-[270px] group">
-                      <img
-                        className="mx-auto "
-                        src="src/assets/shop8.png"
-                        alt=""
-                      />
-                      {/* ------------- */}
-                      <div className="flex w-[150px] justify-between mt-[-120px] mx-auto hidden  group-hover:flex">
-                        <p className="w-[40px] h-[40px] bg-white text-[#4E7C32] text-center py-[9px]">
-                          <FontAwesomeIcon icon={faRecycle} />
-                        </p>
-                        <p className="w-[40px] h-[40px] bg-[#4E7C32] text-white text-center py-[9px]">
-                          <FontAwesomeIcon icon={faBagShopping} />
-                        </p>
-                        <p className="w-[40px] h-[40px] bg-white *:text-[#4E7C32] text-center py-[9px]">
-                          <FontAwesomeIcon icon={faHeart} />
-                        </p>
-                      </div>
-                    </div>
-                    <h1 className="text-[16px] font-bold">
-                      Square cultivation pots{" "}
-                    </h1>
-                    <p className="text-[15px] ">
-                      <span>$38.00</span>{" "}
-                      <span className="line-through">$48.00</span>
-                    </p>
-                  </div>
-                  {/* ---------------------- */}
-                  <div>
-                    <div className="w-[230px] h-[270px] group">
-                      <img
-                        className="mx-auto "
-                        src="src/assets/shop9.png"
-                        alt=""
-                      />
-                      {/* ------------- */}
-                      <div className="flex w-[150px] justify-between mt-[-120px] mx-auto hidden  group-hover:flex">
-                        <p className="w-[40px] h-[40px] bg-white text-[#4E7C32] text-center py-[9px]">
-                          <FontAwesomeIcon icon={faRecycle} />
-                        </p>
-                        <p className="w-[40px] h-[40px] bg-[#4E7C32] text-white text-center py-[9px]">
-                          <FontAwesomeIcon icon={faBagShopping} />
-                        </p>
-                        <p className="w-[40px] h-[40px] bg-white *:text-[#4E7C32] text-center py-[9px]">
-                          <FontAwesomeIcon icon={faHeart} />
-                        </p>
-                      </div>
-                    </div>
-                    <h1 className="text-[16px] font-bold">
-                      Square cultivation pots{" "}
-                    </h1>
-                    <p className="text-[15px] ">
-                      <span>$38.00</span>{" "}
-                      <span className="line-through">$48.00</span>
-                    </p>
-                  </div>
+                ))}
                   {/* ---------------------- */}
                 </div>
                 {/* ------------------------------- */}

@@ -1,81 +1,136 @@
-import { useEffect, useState } from 'react'
-import { Route, Routes, useNavigate } from 'react-router-dom'
-import { getAll, instance } from './Apis'
-import './App.css'
-import Edit from './Pages/Edit'
-import Home from './Pages/Home'
-import { IProduct } from './interface/product'
-import Add from './Pages/add'
-import Header from './Component/header'
-import Footer from './Component/Footer'
-import Banner from './Component/banner'
-import HomePage from './Component/homePage';
-import Detail from './Component/Detail'
-import Shop from './Component/Shop'
-import Page from './Component/page'
+// src/App.js
+import { useEffect, useState } from "react";
+import { Route, Routes, useNavigate } from "react-router-dom";
+import { getAll, instance } from "./Apis";
+import "./App.css";
+import Detail from "./Component/Detail";
 
-const Props = {
-  
-}
+import { ICate, IProduct } from "./interface/product";
+import Home from "./Pages/Home";
+import AdminLayout from "./Layout/admin/Admin";
+import Add from "./Pages/add";
+import Edit from "./Pages/Edit";
+import UserLayout from "./Layout/user/Users";
+import Shop from "./Component/Shop";
+import Page from "./Component/page";
+import { List } from "antd";
+import ListCstegory from "./Pages/Category/List";
+import EditCate from "./Pages/Category/EditCate";
+import AddCate from "./Pages/Category/AddCate";
+
 function App() {
-  const nav= useNavigate()
-  const [products, setProduct]=useState<IProduct[]>([])
-  
-  useEffect(()=>{
-    const fetchData= async()=>{
-      const res= await getAll()
-      setProduct(res)
+  const nav = useNavigate();
+  const [products, setProduct] = useState<IProduct[]>([]);
+  const [categories, setCategory] = useState<ICate[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await getAll();
+      setProduct(res);
+    };
+    fetchData();
+  }, []);
+
+  // Xóa sản phẩm
+  const handleDelete = async (id: number) => {
+    const confirm = window.confirm("Are you sure you want to delete?");
+    if (confirm) {
+      await instance.delete(`products/${id}`);
+      setProduct(products.filter((product) => product.id !== id));
     }
-    fetchData()
-  },[])
-  // delete 
-  const handleDelete=async(id:number)=>{
-    const confirm= window.confirm('are you sure you want to delete')
-    if(confirm){
-       await instance.delete(`products/${id}`)
-      setProduct(products.filter((product)=>product.id !== id))
-    }
-  }
-  // ----------------add
-  const handleAdd= (product: IProduct)=>{
-    (async()=>{
+  };
+
+  // Thêm sản phẩm
+  const handleAdd = (product: IProduct) => {
+    (async () => {
       try {
-        const {data}= await instance.post('products', product)
-        setProduct([...products, data])
-        alert('Bạn đã thêm thành công sản phẩm mới')
-        nav('/')
+        const { data } = await instance.post("products", product);
+        setProduct([...products, data]);
+        alert("Bạn đã thêm thành công sản phẩm mới");
+        nav("/admin");
       } catch (error) {
-        alert('loi: '+error)
+        alert("Lỗi: " + error);
       }
-    })()
+    })();
+  };
+
+  // Sửa sản phẩm
+  const handleEdit = (product: IProduct) => {
+    (async () => {
+      const { data } = await instance.put(`/products/${product.id}`, product);
+      setProduct(products.map((item) => (item.id === data.id ? data : item)));
+      alert("Bạn đã sửa thành công sản phẩm");
+      nav("/admin");
+    })();
+  };
+
+  // -----------------------------------crud categories --------------------------------
+  // ---------------------------------list----------------------------------------------
+  const loadData=async()=>{
+    const {data} = await instance.get('/category');
+      setCategory(data);
   }
-  // ------------edit
-  const handleEdit=(product: IProduct)=>{
-    (async()=>{
-      const {data}= await instance.put(`/products/${product.id}`, product)
-      setProduct(products.map(item=> item.id === data.id ? data:item))
-      alert("Bạn đã sửa thành công sản phẩm")
-      nav('/')
-    })()
-  }
+  useEffect(() => {
+    const fetchData = async () => {
+      await loadData()
+    };
+    fetchData();
+  }, []);
+
+  // ----------------------------------delete category --------------------------------
+  const handleDeleteCate = async (id: number) => {
+    const confirm = window.confirm("Are you sure you want to delete?");
+    if (confirm) {
+      await instance.delete(`category/${id}`);
+      setCategory(categories.filter((cate) => cate.id !== id));
+    }
+  };
+  // --------------------------------add category--------------------------------------
+
+  const handleAddCate = (cate: ICate) => {
+    (async () => {
+      try {
+        const { data } = await instance.post("category", cate);
+        setProduct([...categories, data]);
+        alert("Bạn đã thêm thành công danh mục mới");
+        await loadData()
+        nav("/admin/categories");
+      } catch (error) {
+        alert("Lỗi: " + error);
+      }
+    })();
+  };
+
+  // ---------------------------------edit category------------------------------------
+  const handleEditCate = (category: ICate) => {
+    (async () => {
+      const { data } = await instance.put(`/category/${category.id}`, category);
+      setCategory(categories.map((item) => (item.id === data.id ? data : item)));
+      alert("Bạn đã sửa thành công danh mục");
+      nav("/admin/categories");
+    })();
+  };
+
   return (
-    <> 
-    <Header/>
-      {/* <Routes>
-        <Route path='/' element={<Home product={products} onDel={handleDelete}/>}/>
-        <Route path='/add' element={<Add onAdd={handleAdd}/> }/>
-        <Route path='/edit/:id' element={<Edit onEdit={handleEdit}/>}/>
-      </Routes> */}
-
     <Routes>
-      <Route path='/' element={<Page/>}/>
-      <Route path='/deltail' element={<Detail/>}/>
-      <Route path='/shop' element={<Shop/>}/>
-    </Routes>
+      {/* Routes cho Admin */}
+      <Route path="/admin" element={<AdminLayout />}>
+        <Route index element={<Home product={products} onDel={handleDelete} />} />
+        <Route path="/admin/add" element={<Add onAdd={handleAdd} />} />
+        <Route path="/admin/edit/:id" element={<Edit onEdit={handleEdit} />} />
+        <Route path="/admin/categories" element={<ListCstegory category={categories} delCa={handleDeleteCate}/>}/>
+        <Route path="/admin/categories/addCate" element={<AddCate  onAddCate={handleAddCate}/>} />
+        <Route path="/admin/categories/editCate/:id" element={<EditCate onEditCate={handleEditCate}/>} />
+      </Route>
 
-      <Footer/>
-    </>
-  )
+      {/* Routes cho User */}
+      <Route path="/" element={<UserLayout />}>
+        <Route path="/deltail" element={<Detail />} />
+        <Route path="/shop" element={<Shop />} />
+        <Route path="/" element={<Page />} />
+      </Route>
+    </Routes>
+  );
 }
 
-export default App
+export default App;

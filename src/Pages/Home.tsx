@@ -1,10 +1,25 @@
 import { Link } from "react-router-dom";
-import { IProduct } from "../interface/product";
+import { ICate, IProduct } from "../interface/product";
 import Banner from "../Component/banner";
+import { useEffect, useState } from "react";
+import { instance } from "../Apis";
 
 type Props = { product: IProduct[]; onDel: (id: number) => void };
 
 const Home = ({ product, onDel }: Props) => {
+  const [categories, setCategory] = useState<ICate[]>([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      const {data} = await instance.get('/category');
+      setCategory(data);
+    };
+    fetchData();
+  }, []);
+
+  const getCategoryName = (categoryId: number) => {
+    const category = categories.find(category => category.id === categoryId);
+    return category ? category.name : 'Unknown';
+  };
   return (
     
     <div>
@@ -16,7 +31,7 @@ const Home = ({ product, onDel }: Props) => {
         
         <thead className="ltr:text-left rtl:text-right ">
             <tr>
-                <td><Link to='/add' className=" inline-block rounded bg-indigo-600 px-4 py-2 text-xs font-medium text-white hover:bg-indigo-700">Add</Link></td>
+                <td><Link to='add' className=" inline-block rounded bg-indigo-600 px-4 py-2 text-xs font-medium text-white hover:bg-indigo-700">Add</Link></td>
             </tr>
           <tr>
             <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
@@ -39,7 +54,7 @@ const Home = ({ product, onDel }: Props) => {
         </thead>
         <tbody>
           {product.map((item, index) => (
-            <tr key={index} >
+            <tr className="*:text-center *:border-b " key={index} >
               <td className="whitespace-nowrap px-4 py-2 text-gray-700">
                 {index + 1}
               </td>
@@ -53,7 +68,7 @@ const Home = ({ product, onDel }: Props) => {
                 {item.price}
               </td>
               <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                {item.desc}
+              {getCategoryName(item.categoryId)}
               </td>
               <td>
                 <button

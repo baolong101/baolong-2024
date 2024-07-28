@@ -1,10 +1,10 @@
 {
   "products": [
     {
-      "title": "Product ",
+      "title": "Product update",
       "image": "https://th.bing.com/th/id/OIP.PzYZEuku8eAKMBscWYHnLgHaE8?w=247&h=180&c=7&r=0&o=5&pid=1.7",
       "price": 19.99,
-      "desc": "Description for Product 1",
+      "categoryId": 1,
       "id": 1
     },
     {
@@ -15,17 +15,17 @@
       "id": 4
     },
     {
-      "title": "adsff243",
-      "image": "ưefdvbfvrdc",
+      "title": "sản phẩm 1",
+      "image": "https://th.bing.com/th/id/OIP.HhGomasDQyS81j0Gu4TrkwAAAA?w=133&h=180&c=7&r=0&o=5&pid=1.7",
       "price": 12321,
       "desc": "zdfvwevwe",
       "id": 5
     },
     {
-      "title": "adsffwqedfgh",
-      "image": "ưefdvbfvrdc",
-      "price": 12321,
-      "desc": "zdfvwevwe",
+      "title": "nước lọc",
+      "image": "https://th.bing.com/th?id=OIP.GPFEY6kfgxbsja6gmrW6rwHaE7&w=306&h=204&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2",
+      "price": 1000,
+      "categoryId": 1,
       "id": 6
     }
   ],
@@ -59,6 +59,16 @@
       "name": "Eve Black",
       "email": "eve@example.com",
       "password": "password123"
+    }
+  ],
+  "category": [
+    {
+      "name": "trà",
+      "id": 1
+    },
+    {
+      "id": 2,
+      "name": "Clothing"
     }
   ]
 }

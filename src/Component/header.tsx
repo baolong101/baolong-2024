@@ -1,19 +1,19 @@
 import { faMagnifyingGlass, faUser } from "@fortawesome/free-solid-svg-icons";
 import { faBagShopping } from "@fortawesome/free-solid-svg-icons/faBagShopping";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 const Header = () => {
   const navigate= useNavigate()
   return (
-    <div className="fixed mt-[-32px] h-[120px] text-[14px] bg-black opacity-80 w-full bg-gradient-to-r from-custom-left to-custom-right z-50 ">
+    <div className="fixed top-0 h-[120px] text-[14px] bg-black opacity-80 w-full bg-gradient-to-r from-custom-left to-custom-right z-50 ">
       {/* --------------------top-header--------------------- */}
       <div className=" flex justify-around h-[65px] w-[970px] border-b border-1 border-[#E3E3E3] mx-auto">
         {/* input --------------------- */}
         <div className="w-[70%] ">
           <input
-            className="w-[440px] h-[39px] mt-[17px]  rounded-lg ml-[40px]"
+            className="w-[440px] h-[39px] mt-[17px]  rounded-lg ml-[110px]"
             type="text"
             placeholder="      Suchen Sie nach Produkten, Marken und mehr"
           />{" "}
@@ -32,7 +32,7 @@ const Header = () => {
             <span>
               <FontAwesomeIcon icon={faUser} />
             </span>{" "}
-            Account
+            <Link to='/admin'>Account</Link>
           </div>
           <div className="text-white ml-[32px]">
             <span>

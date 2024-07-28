@@ -41,7 +41,7 @@ const Detail = () => {
     setRating(index + 1); // Cập nhật trạng thái với số sao đã chọn
   };
   return (
-    <main className="h-[1650px]">
+    <main className="h-[1650px] mt-[120px]">
       {/* -------------top-------------------- */}
       <div className="w-[970px] mx-auto  ">
         <div className="h-[500px] mt-[20px] flex justify-between">
@@ -217,11 +217,11 @@ const Detail = () => {
           </div>
         </div>
         {/* --------------------------------------------------------------- */}
-        <div className="w-[900px] *:text-left flex flex-wrap justify-between ">
-          <div className="w-[350px] h-[100px] mt-[30px]">
+        <div className="w-[1000px]  *:text-left flex flex-wrap justify-between ">
+          <div className="w-[400px] h-[100px] mt-[30px]">
             
           </div>
-          <div className="w-[350px] h-[100px] mt-[40px]">
+          <div className="w-[400px] h-[100px] mt-[40px]">
             <div className="py-[10px]">
             <span className="text-[#4E7C32] text-[20px]">Aman gupta</span> <span className="text-[11px]">{[...Array(5)].map((_, index) => (
                   <FontAwesomeIcon
@@ -242,7 +242,7 @@ const Detail = () => {
               continue to use is for sure.
             </p>
           </div>
-          <div className="w-[350px] h-[100px] mt-[30px]">
+          <div className="w-[400px] h-[100px] mt-[30px]">
             <div className="py-[10px]">
             <span className="text-[#4E7C32] text-[20px]">Aman gupta</span> <span className="text-[11px]">{[...Array(5)].map((_, index) => (
                   <FontAwesomeIcon
@@ -263,7 +263,7 @@ const Detail = () => {
               continue to use is for sure.
             </p>
           </div>
-          <div className="w-[350px] h-[100px] mt-[30px]">
+          <div className="w-[400px] h-[100px] mt-[30px]">
             <div className="py-[10px]">
             <span className="text-[#4E7C32] text-[20px]">Aman gupta</span> <span className="text-[11px]">{[...Array(5)].map((_, index) => (
                   <FontAwesomeIcon
@@ -286,8 +286,8 @@ const Detail = () => {
           </div>
         </div>
       </div>
-      <div className="mt-[220px] mx-auto">
-        <button className="text-[12px] bg-[#4E7C32] w-[60px] h-[20px] rounded-lg text-white font-normal items-center text-center">See all</button>
+      <div className="mt-[220px]">
+        <button className="text-[12px] ml-[650px] bg-[#4E7C32] w-[60px] h-[20px] rounded-lg text-white font-normal items-center text-center">See all</button>
       </div>
     </main>
   );
