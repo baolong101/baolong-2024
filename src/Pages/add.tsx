@@ -7,8 +7,8 @@ import { ICate, IProduct } from "../interface/product";
 
 type Props = { onAdd: (product: IProduct) => void };
 const Schemma = Joi.object({
-  title: Joi.string().required(),
-  image: Joi.string().required(),
+  title: Joi.string().required().trim(),
+  image: Joi.string().required().trim(),
   price: Joi.number().required().min(0),
   categoryId: Joi.number()
 });

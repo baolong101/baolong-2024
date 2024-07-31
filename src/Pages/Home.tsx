@@ -23,11 +23,11 @@ const Home = ({ product, onDel }: Props) => {
   return (
     
     <div>
-        <div>
+        <div className="w-[105%] ml-[-16px] *:py-[55px] mt-[-20px] h-[150px] items-center text-center bg-gray-400 py-auto">
             <h1 className="font-bold text-4xl ">Danh sách sản phẩm </h1>
     
         </div>
-      <table className="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
+      <table className="mt-[30px] min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
         
         <thead className="ltr:text-left rtl:text-right ">
             <tr>
@@ -47,7 +47,7 @@ const Home = ({ product, onDel }: Props) => {
               Price
             </th>
             <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-              Description
+              Category
             </th>
             <th className="px-4 py-2">Action</th>
           </tr>

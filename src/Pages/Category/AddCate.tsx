@@ -6,7 +6,7 @@ import { joiResolver } from '@hookform/resolvers/joi';
 
 type Props = { onAddCate: (product: ICate) => void };
 const Schemma = Joi.object({
-  name: Joi.string().required(),
+  name: Joi.string().required().trim(),
 });
 const AddCate = ({onAddCate}: Props) => {
     const {

@@ -5,18 +5,17 @@ import { getAll, instance } from "./Apis";
 import "./App.css";
 import Detail from "./Component/Detail";
 
-import { ICate, IProduct } from "./interface/product";
-import Home from "./Pages/Home";
-import AdminLayout from "./Layout/admin/Admin";
-import Add from "./Pages/add";
-import Edit from "./Pages/Edit";
-import UserLayout from "./Layout/user/Users";
-import Shop from "./Component/Shop";
 import Page from "./Component/page";
-import { List } from "antd";
-import ListCstegory from "./Pages/Category/List";
-import EditCate from "./Pages/Category/EditCate";
+import Shop from "./Component/Shop";
+import { ICate, IProduct } from "./interface/product";
+import AdminLayout from "./Layout/admin/Admin";
+import UserLayout from "./Layout/user/Users";
+import Add from "./Pages/add";
 import AddCate from "./Pages/Category/AddCate";
+import EditCate from "./Pages/Category/EditCate";
+import ListCstegory from "./Pages/Category/List";
+import Edit from "./Pages/Edit";
+import Home from "./Pages/Home";
 
 function App() {
   const nav = useNavigate();
@@ -125,8 +124,8 @@ function App() {
 
       {/* Routes cho User */}
       <Route path="/" element={<UserLayout />}>
-        <Route path="/deltail" element={<Detail />} />
-        <Route path="/shop" element={<Shop />} />
+        <Route path="/detail/:id" element={<Detail />} />
+        <Route path="/shop/:id" element={<Shop />} />
         <Route path="/" element={<Page />} />
       </Route>
     </Routes>

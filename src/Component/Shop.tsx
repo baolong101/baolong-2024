@@ -2,66 +2,44 @@ import { faHeart } from "@fortawesome/free-solid-svg-icons/faHeart";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import { faBagShopping } from "@fortawesome/free-solid-svg-icons/faBagShopping";
-import {
-  faArrowCircleRight,
-  faCircleRight,
-  faRecycle,
-} from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
-import { IProduct } from "../interface/product";
+import { faArrowCircleRight, faRecycle } from "@fortawesome/free-solid-svg-icons";
+import { Link, useParams } from "react-router-dom";
+import { IProduct, ICate } from "../interface/product";
 import { instance } from "../Apis";
 
 type Props = {};
 
 const Shop = (props: Props) => {
   const [products, setProducts] = useState<IProduct[]>([]);
+  const [categories, setCategories] = useState<ICate[]>([]);
+  const { id } = useParams();
+
   useEffect(() => {
-    const fetchData = async () => {
-      const {data} = await instance.get('/products');
+    // Fetch categories
+    const fetchCategories = async () => {
+      const { data } = await instance.get('/categories');
+      setCategories(data);
+    };
+    fetchCategories();
+  }, []);
+
+  useEffect(() => {
+    // Fetch products by selected category
+    const fetchProducts = async () => {
+      const { data } = await instance.get(
+        id ? `/products?categoryId=${id}` : '/products'
+      );
       setProducts(data);
     };
-    fetchData();
-  }, []);
+    fetchProducts();
+  }, [id]);
+
   return (
     <>
       <main>
         <div className="w-full mt-[120px] h-[1350px]">
-          <div className=" h-[100px] bg-gradient-to-r from-shop-left to-shop-right">
-            <h1 className="text-[27px] mx-auto w-[970px] text-left font-semibold py-[30px]">
-              Töpfe & Behälter
-            </h1>
-          </div>
-          {/* --------------------------------------------- */}
-          <div className="w-[970px] mx-auto mt-[20px] flex justify-between *:rounded-[6px]">
-            <div className="w-[190px] h-[57px] items-center bg-[#D2E8CD] flex justify-around">
-              <span>
-                <img src="src/assets/htgyr 1.png" alt="" />{" "}
-              </span>
-              <span>Eckige Töpfe</span>
-            </div>
-            <div className="w-[190px] h-[57px] items-center bg-[#D2E8CD] flex justify-around">
-              <span>
-                <img src="src/assets/hthrt_2.png" alt="" />{" "}
-              </span>
-              <span>Runde Töpfe</span>
-            </div>
-            <div className="w-[190px] h-[57px] items-center bg-[#D2E8CD] flex justify-around">
-              <span>
-                <img src="src/assets/htgyr 3.png" alt="" />{" "}
-              </span>
-              <span>Untersetzer</span>
-            </div>
-            <div className="w-[190px] h-[57px] items-center bg-[#D2E8CD] flex justify-around">
-              <span>
-                <img src="src/assets/htgyr 4.png" alt="" />{" "}
-              </span>
-              <span>Pflanzschalen</span>
-            </div>
-          </div>
-          {/* --------------------------------------------------------- */}
-          <div className=" mt-[70px] ] h-[500px] ">
-            <aside className="w-[25%] float-right ">
-              <h1 className="text-[28px] font-medium ml-[-50px]">Kategorien</h1>
+        <div className="w-[25%] float-right mt-[60px]">
+              <h1 className="text-[28px] font-medium ml-[0px]">Kategorien</h1>
               <div className="*:ml-[80px] *:text-left">
                 <p>
                   <input type="checkbox" name="" id="" />{" "}
@@ -82,7 +60,7 @@ const Shop = (props: Props) => {
               </div>
               <div>
                 <div>
-                  <div className="">
+                  <div className="mt-[300px]">
                     <img
                       className="ml-[40px] mt-[30px]"
                       src="src/assets/sidebar.png"
@@ -134,23 +112,41 @@ const Shop = (props: Props) => {
                   </div>
                 </div>
               </div>
-            </aside>
-            <article className="w-[70%] float-left ">
-              <div className="w-[90%] mx-auto *:text-left flex">
-                <div className="flex *:item-center">
+            </div>
+          <div className="w-[970px] mx-auto mt-[20px] flex justify-between rounded-[6px]">
+            {categories.map(category => (
+              <Link to={`/shop/${category.id}`} key={category.id}>
+                <div
+                  className={`w-[190px] h-[57px] items-center bg-[#D2E8CD] flex justify-around ${
+                    category.id === parseInt(id || '') ? 'bg-[#4E7C32] text-white' : ''
+                  }`}
+                >
+                  <span>
+                    <img src={`src/assets/category${category.id}.png`} alt="" />
+                  </span>
+                  <span>{category.name}</span>
+                </div>
+              </Link>
+            ))}
+          </div>
+          <div className="mt-[70px] h-[500px]">
+            
+            <article className="w-[70%] float-left">
+              <div className="w-[90%] mx-auto text-left flex">
+                <div className="flex items-center">
                   <h1>Sort By: </h1>
-                  <span className="*:border *:border-gray *:text-gray-400 *:w-[200px] *:px-[10px] *:rounded-lg ml-[15px] *:h-[40px] mt-[-10px]">
-                    <select name="" id="">
+                  <span className="border border-gray text-gray-400 w-[200px] px-[10px] rounded-lg ml-[15px] h-[40px] mt-[-10px]">
+                    <select name="sort" id="sort">
                       <option value="">default</option>
                       <option value="">default</option>
                       <option value="">default</option>
                     </select>
                   </span>
                 </div>
-                <div className="flex *:item-center ml-[20px]">
+                <div className="flex items-center ml-[20px]">
                   <h1>Show: </h1>
-                  <span className="*:border *:border-gray *:text-gray-400 *:w-[200px] *:px-[10px] *:rounded-lg ml-[15px] *:h-[40px] mt-[-10px]">
-                    <select name="" id="">
+                  <span className="border border-gray text-gray-400 w-[200px] px-[10px] rounded-lg ml-[15px] h-[40px] mt-[-10px]">
+                    <select name="show" id="show">
                       <option value="">default</option>
                       <option value="">default</option>
                       <option value="">default</option>
@@ -158,44 +154,40 @@ const Shop = (props: Props) => {
                   </span>
                 </div>
               </div>
-              {/* ------------------------------products---------------------------------*/}
-              <div className="w-[90%] mx-auto ">
-                <div className="flex flex-wrap justify-between mx-auto *:text-left mt-[20px] *:mt-[20px]">
-                {products.slice(0,12).map((item)=>(
-                  <div>
-                  <Link to={'/deltail'}>
-                  <div className="w-[230px] h-[270px] group">
-                    <img
-                      className="mx-auto "
-                      src={item.image}
-                      alt=""
-                    />
-                    {/* ------------- */}
-                    <div className="flex w-[150px] justify-between mt-[-120px] mx-auto hidden  group-hover:flex ">
-                      <p className="w-[40px] h-[40px] bg-white text-[#4E7C32] text-center py-[9px]">
-                        <FontAwesomeIcon icon={faRecycle} />
-                      </p>
-                      <p className="w-[40px] h-[40px] bg-[#4E7C32] text-white text-center py-[9px]">
-                        <FontAwesomeIcon icon={faBagShopping} />
-                      </p>
-                      <p className="w-[40px] h-[40px] bg-white *:text-[#4E7C32] text-center py-[9px]">
-                        <FontAwesomeIcon icon={faHeart} />
-                      </p>
+              <div className="w-[90%] mx-auto">
+                <div className="grid grid-cols-3 flex-wrap justify-between mx-auto text-left mt-[20px]">
+                  {products.slice(0, 12).map(item => (
+                    <div key={item.id} className="border-2 border-gray-400 shadow-xl rounded-md h-[380px] w-[260px] overflow-hidden">
+                      <Link to={`/detail/${item.id}`}>
+                        <div className="w-[250px] h-[270px] group mx-auto relative mt-[5px]">
+                          <img
+                            className="mx-auto  h-[270px] rounded-md"
+                            src={item.image}
+                            alt={item.title}
+                          />
+                          <div className="flex w-[150px] justify-between mx-auto hidden group-hover:flex absolute left-0 right-0 top-1/2 transform -translate-y-1/2">
+                            <p className="w-[40px] h-[40px] bg-white text-[#4E7C32] text-center py-[9px]">
+                              <FontAwesomeIcon icon={faRecycle} />
+                            </p>
+                            <p className="w-[40px] h-[40px] bg-[#4E7C32] text-white text-center py-[9px]">
+                              <FontAwesomeIcon icon={faBagShopping} />
+                            </p>
+                            <p className="w-[40px] h-[40px] bg-white text-[#4E7C32] text-center py-[9px]">
+                              <FontAwesomeIcon icon={faHeart} />
+                            </p>
+                          </div>
+                        </div>
+                        <div className="mt-[30px] *:ml-[10px]">
+                          <h1 className="text-[20px] font-bold">{item.title}</h1>
+                          <p className="text-[13px]">
+                            <span className="text-red-500 text-[18px] font-semibold ">${item.price}</span>
+                            <span className="line-through ml-[13px]">$48.00</span>
+                          </p>
+                        </div>
+                      </Link>
                     </div>
-                  </div>
-                  <h1 className="text-[16px] font-bold">
-                  {item.title}
-                  </h1>
-                  <p className="text-[15px] ">
-                    <span>${item.price}</span>{" "}
-                    <span className="line-through">    $48.00</span>
-                  </p>
-                  </Link>
+                  ))}
                 </div>
-                ))}
-                  {/* ---------------------- */}
-                </div>
-                {/* ------------------------------- */}
               </div>
             </article>
           </div>

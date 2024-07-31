@@ -15,6 +15,7 @@ type MenuItem = Required<MenuProps>['items'][number];
 const items: MenuItem[] = [
   { key: 'products', icon: <AppstoreOutlined />, label: 'Products', link: '/admin' },
   { key: 'categories', icon: <ContainerOutlined />, label: 'Categories', link: '/admin/categories' },
+  { key: 'Logout', icon: <ContainerOutlined />, label: 'Logout', link: '/' },
 ];
 
 const AdminLayout: React.FC = () => {

@@ -8,13 +8,6 @@
       "id": 1
     },
     {
-      "title": "egrnmy",
-      "image": "https://th.bing.com/th/id/OIP.PzYZEuku8eAKMBscWYHnLgHaE8?w=247&h=180&c=7&r=0&o=5&pid=1.7",
-      "price": 342,
-      "desc": "grbgf csdvsd",
-      "id": 4
-    },
-    {
       "title": "sản phẩm 1",
       "image": "https://th.bing.com/th/id/OIP.HhGomasDQyS81j0Gu4TrkwAAAA?w=133&h=180&c=7&r=0&o=5&pid=1.7",
       "price": 12321,
@@ -23,10 +16,24 @@
     },
     {
       "title": "nước lọc",
-      "image": "https://th.bing.com/th?id=OIP.GPFEY6kfgxbsja6gmrW6rwHaE7&w=306&h=204&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2",
+      "image": "https://th.bing.com/th?id=OIP.mDxcPDKcCdKQJ2EaUOd4nQHaKC&w=214&h=291&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2",
       "price": 1000,
       "categoryId": 1,
       "id": 6
+    },
+    {
+      "title": "sdhvsjhg",
+      "image": "https://th.bing.com/th?id=OIP.pjXYe6_ccZrOYuDbS6AChQHaKm&w=208&h=299&c=8&rs=1&qlt=30&o=6&pid=3.1&rm=2",
+      "price": 12345,
+      "categoryId": 2,
+      "id": 7
+    },
+    {
+      "title": "Product",
+      "image": "https://th.bing.com/th?q=%e1%ba%a2nh+Hoa+Tulip&w=120&h=120&c=1&rs=1&qlt=90&cb=1&pid=InlineBlock&mkt=en-WW&cc=VN&setlang=en&adlt=strict&t=1&mw=247",
+      "price": 12345,
+      "categoryId": 3,
+      "id": 8
     }
   ],
   "users": [
@@ -69,6 +76,14 @@
     {
       "id": 2,
       "name": "Clothing"
+    },
+    {
+      "name": "skghvve",
+      "id": 3
+    },
+    {
+      "name": "kem",
+      "id": 4
     }
   ]
 }

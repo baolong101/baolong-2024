@@ -8,7 +8,7 @@ import { useParams } from 'react-router-dom';
 
 type Props = { onEditCate: (product: ICate) => void };
 const Schemma = Joi.object({
-  name: Joi.string().required(),
+  name: Joi.string().required().trim(),
 });
 
 const EditCate = ({onEditCate}: Props) => {

@@ -1,7 +1,10 @@
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons/faCartShopping";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { IProduct } from "../interface/product";
+import { instance } from "../Apis";
 
 const Detail = () => {
   // -----------------------quality and totalprice
@@ -40,17 +43,28 @@ const Detail = () => {
   const handleStarClick = (index: any) => {
     setRating(index + 1); // Cập nhật trạng thái với số sao đã chọn
   };
+
+  const {id}= useParams();
+  const [product, setProduct]=useState<IProduct>()
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const {data} = await instance.get(`/products/${id}`);
+      setProduct(data);
+    };
+    fetchData();
+  }, []);
   return (
-    <main className="h-[1650px] mt-[120px]">
+    <main className="h-[1650px] mt-[170px]">
       {/* -------------top-------------------- */}
       <div className="w-[970px] mx-auto  ">
         <div className="h-[500px] mt-[20px] flex justify-between">
           <div className="w-[460px]">
-            <div className="*:w-[78%]  h-[405px] m-auto items-center mx-auto">
-              <img src={selectedImage} alt="Main" />
+            <div className="*:w-[78%]  *:h-[405px] m-auto items-center mx-auto">
+              <img src={product?.image} alt="Main" />
             </div>
-            <div className="flex justify-center mt-[10px] space-x-2">
-              {images.map((image, index) => (
+            <div className="flex justify-center ml-[-100px] mt-[10px] space-x-2">
+              {/* {images.map((image, index) => (
                 <div
                   key={index}
                   className={`border ${
@@ -66,13 +80,22 @@ const Detail = () => {
                     className="w-[80px] px-[10px] py-[10px]"
                   />
                 </div>
-              ))}
+              ))} */}
+              <div className="*:w-[80px] *:h-[80px]">
+              <img src={product?.image} alt="" />
+              </div>
+              <div className="*:w-[80px] *:h-[80px]">
+              <img src={product?.image} alt="" />
+              </div>
+              <div className="*:w-[80px] *:h-[80px]">
+              <img src={product?.image} alt="" />
+              </div>
             </div>
           </div>
           <div className="w-[460px] text-left *:mt-[15px]">
             <h1 className="text-[14px] text-[#4E7C32] font-semibold">Plant</h1>
             <h1 className="text-[40px] font-bold">
-              Square cultivation pots 0.27 to 2 litres
+              {product?.title}
             </h1>
             <p>
               Lorem Ipsum is simply dummy text of the printing and typesetting
@@ -80,7 +103,7 @@ const Detail = () => {
               ever since the
             </p>
             <p className="h-[40px] ">
-              <span className="text-[26px] font-semibold ">${totalPrice}</span>{" "}
+              <span className="text-[26px] font-semibold ">${product?.price}</span>{" "}
               <span className="px-[10px] py-[5px] ml-[10px] items-center bg-[#FFEDE0] rounded-[5px] my-auto-[-10px]">
                 50%
               </span>

@@ -7,11 +7,11 @@ type Props = {category: ICate[], delCa:(id:number) =>void}
 const ListCstegory = ({category, delCa}: Props) => {
   return (
     <div>
-        <div>
-            <h1 className="font-bold text-4xl ">Danh sách danh mucj </h1>
+        <div className="w-[105%] ml-[-16px] *:py-[55px] mt-[-20px] h-[150px] items-center text-center bg-gray-400 py-auto">
+            <h1 className="font-bold text-4xl ">Danh sách danh mục </h1>
     
         </div>
-      <table className="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
+      <table className="min-w-full divide-y-2 mt-[30px] divide-gray-200 bg-white text-sm">
         
         <thead className="ltr:text-left rtl:text-right ">
             <tr>
@@ -29,7 +29,7 @@ const ListCstegory = ({category, delCa}: Props) => {
         </thead>
         <tbody>
           {category.map((item, index) => (
-            <tr className="*:text-center *:border-b" key={index} >
+            <tr className="*:text-center h-[40px] *:border-b" key={index} >
               <td className="whitespace-nowrap px-4 py-2 text-gray-700">
                 {index + 1}
               </td>
